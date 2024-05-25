@@ -1,0 +1,564 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">5/24/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:36:03 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc" class="file"><acronym title="C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc">C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">2</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">58</td></tr>
+</table>
+</td>
+</table><a name="IDVZ0KBITLNAPMC4V11BMNGQ0FSH550UWOILIW5PWID0AFLNEEOO"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDF3HDCUQC4DAJC421NG0JJOLFCNUO2SRCGFEHHBEHLVYZ3X3CGGWI">Zero hole size multi-layer pad(s) detected</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWR0XEZSTT1FAFPOWW4YWQDTA1M0JL001GIKNDVB14TF40BNAJB4D">Multilayer Pads with 0 size Hole found</a></td>
+<td class="column2">1</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">2</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJI2T22RC5ABIK1TVKXBFZIE25GTAD2P34GHIBRMJWOLTBCZFGEMB">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">29</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQZLWPC2GLSN2D5JLV55HS2QEWKPQUK1IPEPBWBGEXIKEYVHUFJIN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5VA51VCOZTWHLFJ1XH0WOF15NC4LMQP2TGNJLFUN12W5DVPDOD">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCZMTKJC4F1MWMK3MVJZS3ZPVIIZPAKIOWLBKNSMCWQZBS55AKRIJ">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJKM5D1PCGR2DKYXGNQLO522CJLMIDT3BPQC5FGFYQ5LA2XCF3KOK">Width Constraint (Min=0.4mm) (Max=0.7mm) (Preferred=0.4mm) (InNet('+5'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAHDMOQFJAS2XI5CE3BUB2MEUINM1AUZ33SBDZ4DQRCLUVCO0LD4D">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">7</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID42SZ4HUZURM5MIRVUBAR4MTZHNXWFNHZ0XTYN0NI0AQT5XJFNTBO">Width Constraint (Min=0.5mm) (Max=1mm) (Preferred=1mm) (InNet('VCC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDBR1S1OPK3OHMLHFHKRZGT451BGIBOZ5YEQE0Y0JZTIS12JOZHYNG">Width Constraint (Min=0.4mm) (Max=1mm) (Preferred=1mm) (InNet('GND'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1OTJPGPE45SYL1VFYAMV5VERVFVJPCVERNYEE2B45WAJ3S20RASF">Width Constraint (Min=0.4mm) (Max=0.4mm) (Preferred=0.4mm) (InNet('3V3'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0QT2AG3UEF1GIWFPJ0QIJWOVHK1WG1AWPRSRZZLHE0FBVQTGXPOF">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCQJD2ZBIS3P5KOYETYFWOVECMM020B00XNPX5TGZ2VFNZHQ5KUGE">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1QA1VRSTOTG0E4TRT1HC2JTHJGJCIOC4I0HTHXSXS1M5ZLFYNSM">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQYKSIQKNPM1AEQ5OCXFFSM054DGWESIBKW1IGF5UO4TYERBXPTM">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">11</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2VKOBYGRHGRHKV3EWLNE3ZZXMGR3GM333ACOORF4WP4DULWX3EDO">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDS0FB1025V43KDXMQNESWANTBFFUMBA2DV3YPGTBYUP3QISR2NECI">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDY2GBPPS50VYNBJTF3LTOLZCXUKD5GMQTAJFJBJNXJ5I4512P3XMO">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDR5NNA3HW01RKCMQFEIAE400XCCZS3KWUR5BKHXXET0FDZ0LHP3K">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">58</td>
+</tr>
+</table><br><a name="IDCTYELINYO0VPJ0D5Y1MSHIZNDDD0SNZ0GF5KSSPIUBSNW5ZU3RMG"><h2>Warnings</h2></a><a name="IDF3HDCUQC4DAJC421NG0JJOLFCNUO2SRCGFEHHBEHLVYZ3X3CGGWI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Zero hole size multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6594.504mil|Location2.X=6665.496mil|Location1.Y=1784.504mil|Location2.Y=1855.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6594.504mil|Location2.X=6665.496mil|Location1.Y=1784.504mil|Location2.Y=1855.496mil|Absolute=True">Pad *-20(168.402mm,46.228mm) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=0mil|Location1.Y=0mil|Location2.Y=0mil|Absolute=True">Net +5</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDWR0XEZSTT1FAFPOWW4YWQDTA1M0JL001GIKNDVB14TF40BNAJB4D"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Multilayer Pads with 0 size Hole found</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6594.504mil|Location2.X=6665.496mil|Location1.Y=1784.504mil|Location2.Y=1855.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6594.504mil|Location2.X=6665.496mil|Location1.Y=1784.504mil|Location2.Y=1855.496mil|Absolute=True">Pad *-20(168.402mm,46.228mm) on Multi-Layer</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJI2T22RC5ABIK1TVKXBFZIE25GTAD2P34GHIBRMJWOLTBCZFGEMB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5839.375mil|Location2.X=5850.625mil|Location1.Y=2904.611mil|Location2.Y=2915.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5839.375mil|Location2.X=5850.625mil|Location1.Y=2904.611mil|Location2.Y=2915.861mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C2-1(148.843mm,73.66mm) on Top Layer And Pad C2-2(148.083mm,73.66mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5269.139mil|Location2.X=5280.389mil|Location1.Y=2499.375mil|Location2.Y=2510.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5269.139mil|Location2.X=5280.389mil|Location1.Y=2499.375mil|Location2.Y=2510.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C3-1(134.239mm,64.007mm) on Top Layer And Pad C3-2(134.239mm,63.247mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5534.611mil|Location2.X=5545.861mil|Location1.Y=3119.375mil|Location2.Y=3130.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5534.611mil|Location2.X=5545.861mil|Location1.Y=3119.375mil|Location2.Y=3130.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C6-1(140.462mm,78.995mm) on Top Layer And Pad C6-2(140.462mm,79.755mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5864.611mil|Location2.X=5875.861mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5864.611mil|Location2.X=5875.861mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C7-1(148.844mm,44.197mm) on Top Layer And Pad C7-2(148.844mm,44.957mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6204.611mil|Location2.X=6215.861mil|Location1.Y=1974.375mil|Location2.Y=1985.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6204.611mil|Location2.X=6215.861mil|Location1.Y=1974.375mil|Location2.Y=1985.625mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C8-1(157.48mm,49.912mm) on Top Layer And Pad C8-2(157.48mm,50.672mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6719.375mil|Location2.X=6730.625mil|Location1.Y=1824.611mil|Location2.Y=1835.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6719.375mil|Location2.X=6730.625mil|Location1.Y=1824.611mil|Location2.Y=1835.861mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad C9-1(171.195mm,46.228mm) on Top Layer And Pad C9-2(170.435mm,46.228mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6259.611mil|Location2.X=6270.861mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6259.611mil|Location2.X=6270.861mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A1-B12(159.537mm,77.22mm) on Top Layer And Pad J1-A4-B9(158.737mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.115mil|Location2.X=6239.365mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.115mil|Location2.X=6239.365mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A4-B9(158.737mm,77.22mm) on Top Layer And Pad J1-B8(158.087mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6149.375mil|Location2.X=6160.625mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6149.375mil|Location2.X=6160.625mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A6(156.587mm,77.22mm) on Top Layer And Pad J1-A7(156.087mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6169.06mil|Location2.X=6180.31mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6169.06mil|Location2.X=6180.31mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A6(156.587mm,77.22mm) on Top Layer And Pad J1-B7(157.087mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6129.69mil|Location2.X=6140.94mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6129.69mil|Location2.X=6140.94mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A7(156.087mm,77.22mm) on Top Layer And Pad J1-B6(155.587mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6039.139mil|Location2.X=6050.389mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6039.139mil|Location2.X=6050.389mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-B1-A12(153.137mm,77.22mm) on Top Layer And Pad J1-B4-A9(153.937mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6070.635mil|Location2.X=6081.885mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6070.635mil|Location2.X=6081.885mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-B4-A9(153.937mm,77.22mm) on Top Layer And Pad J1-B5(154.587mm,77.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2097.17mil|Location2.Y=2108.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2097.17mil|Location2.Y=2108.42mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-1(138.557mm,53.736mm) on Top Layer And Pad U2-2(138.557mm,53.086mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1790.084mil|Location2.Y=1801.334mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1790.084mil|Location2.Y=1801.334mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-15(146.007mm,45.286mm) on Top Layer And Pad U2-16(146.007mm,45.936mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1815.674mil|Location2.Y=1826.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1815.674mil|Location2.Y=1826.924mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-16(146.007mm,45.936mm) on Top Layer And Pad U2-17(146.007mm,46.586mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1841.265mil|Location2.Y=1852.515mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1841.265mil|Location2.Y=1852.515mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-17(146.007mm,46.586mm) on Top Layer And Pad U2-18(146.007mm,47.236mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1866.855mil|Location2.Y=1878.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1866.855mil|Location2.Y=1878.105mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-18(146.007mm,47.236mm) on Top Layer And Pad U2-19(146.007mm,47.886mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2071.58mil|Location2.Y=2082.83mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2071.58mil|Location2.Y=2082.83mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-2(138.557mm,53.086mm) on Top Layer And Pad U2-3(138.557mm,52.436mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1918.036mil|Location2.Y=1929.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1918.036mil|Location2.Y=1929.286mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-20(146.007mm,48.536mm) on Top Layer And Pad U2-21(146.007mm,49.186mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1943.627mil|Location2.Y=1954.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=1943.627mil|Location2.Y=1954.877mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-21(146.007mm,49.186mm) on Top Layer And Pad U2-22(146.007mm,49.836mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=2020.399mil|Location2.Y=2031.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=2020.399mil|Location2.Y=2031.649mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-24(146.007mm,51.136mm) on Top Layer And Pad U2-25(146.007mm,51.786mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=2071.58mil|Location2.Y=2082.83mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5770.241mil|Location2.X=5781.491mil|Location1.Y=2071.58mil|Location2.Y=2082.83mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-26(146.007mm,52.436mm) on Top Layer And Pad U2-27(146.007mm,53.086mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2045.989mil|Location2.Y=2057.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2045.989mil|Location2.Y=2057.239mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-3(138.557mm,52.436mm) on Top Layer And Pad U2-4(138.557mm,51.786mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5452.19mil|Location2.X=5454.503mil|Location1.Y=2063.253mil|Location2.Y=2065.566mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5452.19mil|Location2.X=5454.503mil|Location1.Y=2063.253mil|Location2.Y=2065.566mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.05mm) Between Pad U2-3(138.557mm,52.436mm) on Top Layer And Track (138.477mm,52.635mm)(138.515mm,52.597mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2020.399mil|Location2.Y=2031.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=2020.399mil|Location2.Y=2031.649mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-4(138.557mm,51.786mm) on Top Layer And Pad U2-5(138.557mm,51.136mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1994.808mil|Location2.Y=2006.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1994.808mil|Location2.Y=2006.058mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-5(138.557mm,51.136mm) on Top Layer And Pad U2-6(138.557mm,50.486mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1969.217mil|Location2.Y=1980.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1969.217mil|Location2.Y=1980.467mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-6(138.557mm,50.486mm) on Top Layer And Pad U2-7(138.557mm,49.836mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1943.627mil|Location2.Y=1954.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.934mil|Location2.X=5488.184mil|Location1.Y=1943.627mil|Location2.Y=1954.877mil|Absolute=True">Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad U2-7(138.557mm,49.836mm) on Top Layer And Pad U2-8(138.557mm,49.186mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQZLWPC2GLSN2D5JLV55HS2QEWKPQUK1IPEPBWBGEXIKEYVHUFJIN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.118mil|Location2.X=5461.098mil|Location1.Y=2061.007mil|Location2.Y=2077.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.118mil|Location2.X=5461.098mil|Location1.Y=2061.007mil|Location2.Y=2077.987mil|Absolute=True">Short-Circuit Constraint: Between Pad U2-3(138.557mm,52.436mm) on Top Layer And Track (138.477mm,52.635mm)(138.515mm,52.597mm) on Top Layer Location : [X = 138.496mm][Y = 52.565mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID5VA51VCOZTWHLFJ1XH0WOF15NC4LMQP2TGNJLFUN12W5DVPDOD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6269.173mil|Location2.X=6366.89mil|Location1.Y=3005.236mil|Location2.Y=3120.354mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6269.173mil|Location2.X=6366.89mil|Location1.Y=3005.236mil|Location2.Y=3120.354mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J1-A1-B12(159.537mm,77.22mm) on Top Layer And Pad J1-1(160.657mm,77.795mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5960.512mil|Location2.X=6349.488mil|Location1.Y=2940.157mil|Location2.Y=3131.299mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5960.512mil|Location2.X=6349.488mil|Location1.Y=2940.157mil|Location2.Y=3131.299mil|Absolute=True">Un-Routed Net Constraint: Net VCC Between Pad J1-B4-A9(153.937mm,77.22mm) on Top Layer And Track (158.737mm,75.595mm)(158.737mm,76.995mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5707.89mil|Location2.X=5788.724mil|Location1.Y=1872.417mil|Location2.Y=1923.724mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5707.89mil|Location2.X=5788.724mil|Location1.Y=1872.417mil|Location2.Y=1923.724mil|Absolute=True">Un-Routed Net Constraint: Net +5 Between Pad U2-19(146.007mm,47.886mm) on Top Layer And Pad U2-20(146.007mm,48.536mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5351.87mil|Location2.X=5555mil|Location1.Y=1972.225mil|Location2.Y=2190mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5351.87mil|Location2.X=5555mil|Location1.Y=1972.225mil|Location2.Y=2190mil|Absolute=True">Un-Routed Net Constraint: Net NetC4_2 Between Track (138.477mm,52.635mm)(138.515mm,52.597mm) on Top Layer And Pad U2-2(138.557mm,53.086mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDAHDMOQFJAS2XI5CE3BUB2MEUINM1AUZ33SBDZ4DQRCLUVCO0LD4D"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5315.429mil|Location2.X=5368.373mil|Location1.Y=2424.832mil|Location2.Y=2458.823mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5315.429mil|Location2.X=5368.373mil|Location1.Y=2424.832mil|Location2.Y=2458.823mil|Absolute=True">Width Constraint: Track (134.239mm,63.227mm)(136.561mm,60.905mm) on Top Layer Actual Width = 0.7mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6752.595mil|Location2.X=6780.73mil|Location1.Y=2112.595mil|Location2.Y=2127.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6752.595mil|Location2.X=6780.73mil|Location1.Y=2112.595mil|Location2.Y=2127.405mil|Absolute=True">Width Constraint: Track (168.402mm,53.848mm)(175.006mm,53.848mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2210.095mil|Location2.Y=2224.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2210.095mil|Location2.Y=2224.905mil|Absolute=True">Width Constraint: Track (168.465mm,56.325mm)(175.07mm,56.325mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2310.095mil|Location2.Y=2324.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2310.095mil|Location2.Y=2324.905mil|Absolute=True">Width Constraint: Track (168.465mm,58.864mm)(175.07mm,58.864mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2410.095mil|Location2.Y=2424.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2410.095mil|Location2.Y=2424.905mil|Absolute=True">Width Constraint: Track (168.465mm,61.404mm)(175.07mm,61.404mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2510.095mil|Location2.Y=2524.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2510.095mil|Location2.Y=2524.905mil|Absolute=True">Width Constraint: Track (168.465mm,63.944mm)(175.07mm,63.944mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2610.095mil|Location2.Y=2624.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6755.095mil|Location2.X=6783.23mil|Location1.Y=2610.095mil|Location2.Y=2624.905mil|Absolute=True">Width Constraint: Track (168.465mm,66.484mm)(175.07mm,66.484mm) on Top Layer Actual Width = 0.3mm, Target Width = 0.254mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQYKSIQKNPM1AEQ5OCXFFSM054DGWESIBKW1IGF5UO4TYERBXPTM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6259.611mil|Location2.X=6270.861mil|Location1.Y=3057.17mil|Location2.Y=3068.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6259.611mil|Location2.X=6270.861mil|Location1.Y=3057.17mil|Location2.Y=3068.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A1-B12(159.537mm,77.22mm) on Top Layer And Pad J1-A4-B9(158.737mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.115mil|Location2.X=6239.365mil|Location1.Y=3057.17mil|Location2.Y=3068.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.115mil|Location2.X=6239.365mil|Location1.Y=3057.17mil|Location2.Y=3068.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A4-B9(158.737mm,77.22mm) on Top Layer And Pad J1-B8(158.087mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6188.745mil|Location2.X=6199.995mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6188.745mil|Location2.X=6199.995mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A5(157.587mm,77.22mm) on Top Layer And Pad J1-B7(157.087mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6208.43mil|Location2.X=6219.68mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6208.43mil|Location2.X=6219.68mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A5(157.587mm,77.22mm) on Top Layer And Pad J1-B8(158.087mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6149.375mil|Location2.X=6160.625mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6149.375mil|Location2.X=6160.625mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A6(156.587mm,77.22mm) on Top Layer And Pad J1-A7(156.087mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6169.06mil|Location2.X=6180.31mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6169.06mil|Location2.X=6180.31mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A6(156.587mm,77.22mm) on Top Layer And Pad J1-B7(157.087mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6129.69mil|Location2.X=6140.94mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6129.69mil|Location2.X=6140.94mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A7(156.087mm,77.22mm) on Top Layer And Pad J1-B6(155.587mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6090.32mil|Location2.X=6101.57mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6090.32mil|Location2.X=6101.57mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A8(155.087mm,77.22mm) on Top Layer And Pad J1-B5(154.587mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6110.005mil|Location2.X=6121.255mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6110.005mil|Location2.X=6121.255mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-A8(155.087mm,77.22mm) on Top Layer And Pad J1-B6(155.587mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6039.139mil|Location2.X=6050.389mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6039.139mil|Location2.X=6050.389mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-B1-A12(153.137mm,77.22mm) on Top Layer And Pad J1-B4-A9(153.937mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6070.635mil|Location2.X=6081.885mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6070.635mil|Location2.X=6081.885mil|Location1.Y=3011.895mil|Location2.Y=3023.145mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.2mm &lt; 0.254mm) Between Pad J1-B4-A9(153.937mm,77.22mm) on Top Layer And Pad J1-B5(154.587mm,77.22mm) on Top Layer [Top Solder] Mask Sliver [0.2mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDS0FB1025V43KDXMQNESWANTBFFUMBA2DV3YPGTBYUP3QISR2NECI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6835.869mil|Location2.X=6847.119mil|Location1.Y=1727.554mil|Location2.Y=1738.804mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6835.869mil|Location2.X=6847.119mil|Location1.Y=1727.554mil|Location2.Y=1738.804mil|Absolute=True">Silk To Silk Clearance Constraint: (0.051mm &lt; 0.254mm) Between Text "AREF" (170.731mm,43.223mm) on Top Overlay And Track (173.863mm,34.802mm)(173.863mm,50.542mm) on Top Overlay Silk Text to Silk Clearance [0.051mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6832.254mil|Location2.X=6843.504mil|Location1.Y=1411.068mil|Location2.Y=1422.318mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6832.254mil|Location2.X=6843.504mil|Location1.Y=1411.068mil|Location2.Y=1422.318mil|Absolute=True">Silk To Silk Clearance Constraint: (0.235mm &lt; 0.254mm) Between Text "D11" (171.747mm,35.984mm) on Top Overlay And Track (173.863mm,34.802mm)(173.863mm,50.542mm) on Top Overlay Silk Text to Silk Clearance [0.235mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6834.878mil|Location2.X=6846.128mil|Location1.Y=1511.068mil|Location2.Y=1522.318mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6834.878mil|Location2.X=6846.128mil|Location1.Y=1511.068mil|Location2.Y=1522.318mil|Absolute=True">Silk To Silk Clearance Constraint: (0.101mm &lt; 0.254mm) Between Text "D12" (171.614mm,38.524mm) on Top Overlay And Track (173.863mm,34.802mm)(173.863mm,50.542mm) on Top Overlay Silk Text to Silk Clearance [0.101mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6834.878mil|Location2.X=6846.128mil|Location1.Y=1642.306mil|Location2.Y=1653.556mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6834.878mil|Location2.X=6846.128mil|Location1.Y=1642.306mil|Location2.Y=1653.556mil|Absolute=True">Silk To Silk Clearance Constraint: (0.101mm &lt; 0.254mm) Between Text "D13" (171.614mm,41.191mm) on Top Overlay And Track (173.863mm,34.802mm)(173.863mm,50.542mm) on Top Overlay Silk Text to Silk Clearance [0.101mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDY2GBPPS50VYNBJTF3LTOLZCXUKD5GMQTAJFJBJNXJ5I4512P3XMO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Net Antennae (Tolerance=0mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.846mil|Location2.X=5468.435mil|Location1.Y=2062.248mil|Location2.Y=2096.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5444.846mil|Location2.X=5468.435mil|Location1.Y=2062.248mil|Location2.Y=2096.448mil|Absolute=True">Net Antennae: Track (138.477mm,52.635mm)(138.515mm,52.597mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5443.37mil|Location2.X=5466.959mil|Location1.Y=2063.724mil|Location2.Y=2097.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Safi\Desktop\Safi\projects\Alternate_Arduino\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5443.37mil|Location2.X=5466.959mil|Location1.Y=2063.724mil|Location2.Y=2097.924mil|Absolute=True">Net Antennae: Track (138.477mm,52.635mm)(138.515mm,52.597mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
